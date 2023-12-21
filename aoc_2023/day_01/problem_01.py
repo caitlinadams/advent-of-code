@@ -31,7 +31,7 @@ def get_calibration_value(numbers: list[int]) -> int:
 @click.command()
 @click.option(
     "--file",
-    default="aoc_2023/day_01/data/problem_01_input.txt",
+    default="aoc_2023/day_01/data/input.txt",
 )
 def problem_01(file):
     """Day 1, Problem 1"""
