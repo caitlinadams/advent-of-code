@@ -7,6 +7,7 @@ from aoc_2023.day_02.problem_01 import (
     get_game_colour_counts,
     get_max_colour_counts_per_game,
     check_possible,
+    get_cube_of_max_counts,
 )
 
 
@@ -38,3 +39,9 @@ def test_max_colour_counts(case: MockData):
 def test_possible(case: MockData):
     """Tests for check_possible function"""
     assert check_possible(case.max_colour_counts, bag_contents) == case.possible
+
+
+@pytest.mark.parametrize("case", cases)
+def test_cube_of_max_counts(case: MockData):
+    """Tests for get_cube_of_max_counts function"""
+    assert get_cube_of_max_counts(case.max_colour_counts) == case.max_counts_cubed

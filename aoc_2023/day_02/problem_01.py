@@ -100,6 +100,16 @@ def check_possible(
     return possible
 
 
+def get_cube_of_max_counts(max_colour_counts: dict[str, int]) -> int:
+    """Multiply the maximum number of cubes together for each colour"""
+
+    cubed = 1
+    for colour in max_colour_counts.keys():
+        cubed = cubed * max_colour_counts[colour]
+
+    return cubed
+
+
 # def validate_game(game, bag_contents):
 #     """Return game id and 1 for valid, 0 for invalid"""
 
@@ -112,11 +122,6 @@ def check_possible(
 #     return (game_id_int, possible)
 
 
-@click.command()
-@click.option(
-    "--file",
-    default="aoc_2023/day_02/data/input.txt",
-)
 def problem_01(file):
     """Day 2, Problem 1"""
 
@@ -138,10 +143,42 @@ def problem_01(file):
 
     answer = sum([game_id * allowed for game_id, allowed in zip(ids, possible)])
 
-    print(answer)
+    print(f"Answer for Day 2, Problem 1: {answer}")
 
-    print("day 2, problem 1")
+
+def problem_02(file):
+    """Day 2, Problem 2"""
+
+    with open(file, encoding="utf-8") as f:
+        games = list(f)
+
+    draws = [get_game_draws(game) for game in games]
+    game_colour_counts = [get_game_colour_counts(draw) for draw in draws]
+    game_colour_counts_max = [
+        get_max_colour_counts_per_game(count) for count in game_colour_counts
+    ]
+
+    cubed_values = [
+        get_cube_of_max_counts(max_counts) for max_counts in game_colour_counts_max
+    ]
+
+    answer = sum(cubed_values)
+
+    print(f"Answer for Day 2, Problem 2: {answer}")
+
+
+@click.command()
+@click.option(
+    "--file",
+    default="aoc_2023/day_02/data/input.txt",
+)
+def main(file):
+    """Run both problems"""
+    problem_01(file)
+    problem_02(file)
+
+    print("Finished")
 
 
 if __name__ == "__main__":
-    problem_01()  # pylint: disable=no-value-for-parameter
+    main()  # pylint: disable=no-value-for-parameter
