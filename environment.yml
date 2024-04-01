@@ -1,0 +1,8 @@
+name: adventofcode
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+dependencies:
+  - click
+  - pytest
